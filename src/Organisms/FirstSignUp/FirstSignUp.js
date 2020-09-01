@@ -13,7 +13,7 @@ function FirstSignUp(props) {
   // const [telephone, setTelephone] = useState("");
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
-  const [formIsValid, setFormIsValid] = useState(null);
+  const [formIsValid, setFormIsValid] = useState(false);
   const [signTheAgreement, setSignTheAgreement] = useState(false);
 
   const [fields, setFields] = useState({
@@ -37,31 +37,86 @@ function FirstSignUp(props) {
 
   useEffect(() => {
     validateHandler();
-    console.log("Fields :", fields);
-    console.log("Touched :", fields);
-    console.log("Errors :", fields);
   }, [fields]);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formIsValid);
+    console.log("isFormValid: ", formIsValid);
+    trimFormData();
     if (formIsValid) {
       console.log("User are singing in...");
     }
   };
 
-  const validateHandler = () => {
-    let isFormValid = true;
-
-    if (fields.email.length === 0) {
-      isFormValid = false;
-    } else if (isValidEmail(fields.email)) {
-      setErrors({ ...errors, email: "Ви ввели невірну пошту" });
-      isFormValid = false;
-    } else {
-      setErrors({ ...errors, email: "" });
-    }
+  const trimFormData = () => {
+    let fieldsReadyToSubmit = { ...fields };
+    Object.keys(fieldsReadyToSubmit).map(
+      (key) => (fieldsReadyToSubmit[key] = fieldsReadyToSubmit[key].trim())
+    );
+    setFields(fieldsReadyToSubmit);
   };
+
+  const validateHandler = () => {
+    const passwordMin = 6;
+    const passwordMax = 32;
+    const errors = {};
+
+    if (fields.fullname.length === 0 && touched.fullname) {
+      errors["fullname"] = `Поле "ПІБ" не може бути порожнім`;
+    } else if (!isOnlyLetters(fields.fullname) && touched.fullname) {
+      errors["fullname"] = "ПІБ має містити лише";
+    } else {
+      errors["fullname"] = "";
+    }
+
+    if (fields.telephone.length === 0 && touched.telephone) {
+      errors["telephone"] = `Поле "телефон" не може бути порожнім`;
+    } else if (!isOnlyNumbers(fields.telephone) && touched.telephone) {
+      errors["telephone"] = "Номер телефону має містити лише цифри";
+    } else {
+      errors["telephone"] = "";
+    }
+
+    if (fields.email.length === 0 && touched.email) {
+      errors["email"] = `Поле "Електронна пошта" не може бути порожнім`;
+    } else if (!isValidEmail(fields.email) && touched.email) {
+      errors["email"] = "Ви ввели невірну пошту";
+    } else {
+      errors["email"] = "";
+    }
+
+    if (fields.password.length === 0 && touched.password) {
+      errors["password"] = `Поле "Пароль" не може бути порожнім`;
+    } else if (fields.password.length < passwordMin && touched.password) {
+      errors[
+        "password"
+      ] = `Ви ввели закороткий пароль. Мінімальна довжина ${passwordMin} символів`;
+    } else if (fields.password.length > passwordMax && touched.password) {
+      errors[
+        "password"
+      ] = `Занадто довгий пароль. Максимальнальна довжина не повинна перевищувати ${passwordMax} символів`;
+    } else {
+      errors["password"] = "";
+    }
+
+    let isFormValid =
+      Object.values(errors).filter((error) => error !== "").length === 0 &&
+      Object.values(fields).filter((field) => field.length === 0).length === 0;
+    console.log(errors);
+
+    setFormIsValid(isFormValid);
+    setErrors(errors);
+  };
+
+  function isOnlyNumbers(text) {
+    let re = /^[0-9]*$/;
+    return re.test(String(text).toLowerCase());
+  }
+
+  function isOnlyLetters(text) {
+    let re = /^[a-zA-Z\s\u0400-\u04FF]*$/;
+    return re.test(String(text).toLowerCase());
+  }
 
   function isValidEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -75,8 +130,8 @@ function FirstSignUp(props) {
   };
 
   return (
-    <form onSubmit={onSubmit} className={styles.LoginForm}>
-      <Text fontSize={3.2} margin={"0 0 6rem 0"} bold>
+    <form onSubmit={onSubmit} className={styles.FirstSignUp}>
+      <Text fontSize={3.2} margin={"0 0 5rem 0"} bold>
         Реєстрація
       </Text>
 

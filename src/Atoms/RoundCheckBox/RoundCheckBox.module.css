@@ -60,10 +60,10 @@
 
 /* Style the indicator (dot/circle) */
 .Container .Checkbox:after {
-  top: 0.35rem;
-  left: 0.35rem;
-  width: 0.6rem;
-  height: 0.6rem;
+  top: 0.325rem;
+  left: 0.325rem;
+  width: 0.65rem;
+  height: 0.65rem;
   border-radius: 50%;
   background: white;
 }

@@ -34,12 +34,7 @@ function LoginForm(props) {
   };
 
   const validateHandler = () => {
-    const passwordMin = 6;
-    const passwordMax = 32;
     let formIsValid = true;
-
-    // console.log(email + " :", email.length);
-    // console.log(password + " :", password.length);
 
     if (!isValidEmail(email) && emailTouched) {
       setEmailError("Ви ввели невірну пошту");
@@ -50,21 +45,6 @@ function LoginForm(props) {
       setEmailError(null);
     }
 
-    if (password.length < passwordMin && passwordTouched) {
-      setPasswordError(
-        `Ви ввели закороткий пароль. Мінімальна довжина ${passwordMin} символів`
-      );
-      formIsValid = false;
-    } else if (password.length > passwordMax && passwordTouched) {
-      setPasswordError(
-        `Занадто довгий пароль. Максимальнальна довжина не повинна перевищувати ${passwordMax} символів`
-      );
-      formIsValid = false;
-    } else if (password.length === 0) {
-      formIsValid = false;
-    } else {
-      setPasswordError(null);
-    }
     return formIsValid;
   };
 
@@ -75,7 +55,7 @@ function LoginForm(props) {
 
   return (
     <form onSubmit={onSubmit} className={styles.LoginForm}>
-      <Text fontSize={3.2} margin={"0 0 6rem 0"} bold>
+      <Text fontSize={3.2} margin={"0 0 5rem 0"} bold>
         Авторизація
       </Text>
       <InputWithError

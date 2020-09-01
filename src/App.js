@@ -8,7 +8,7 @@ import TransparentButton from "./Atoms/TransparentButton/TransparentButton";
 import RoundedButton from "./Atoms/RoundedButton/RoundedButton";
 import TabLine from "./Atoms/TabLine/TabLine";
 import PlayButton from "./Atoms/PlayButton/PlayButton";
-import LoginPage from "./Pages/LoginPage/LoginPage";
+import AuthPage from "./Pages/AuthPage/AuthPage";
 import FirstSignUp from "./Organisms/FirstSignUp/FirstSignUp";
 
 function App() {
@@ -28,11 +28,11 @@ function App() {
       <TabLine /> */}
       {/* <PlayButton /> */}
 
-      <FirstSignUp />
+      {/* <FirstSignUp /> */}
 
       {/* PAGES */}
 
-      {/* <LoginPage /> */}
+      <AuthPage />
     </div>
   );
 }
