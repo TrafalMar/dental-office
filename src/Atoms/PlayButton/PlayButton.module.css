@@ -1,0 +1,91 @@
+.PlayButton {
+  display: grid;
+  place-items: center;
+
+  position: relative;
+
+  width: 16rem;
+  height: 16rem;
+  border-radius: 8rem;
+  transform: rotate(90deg);
+  cursor: pointer;
+  z-index: 1;
+  background-color: #4e4e4e;
+}
+
+.PlayButton .AnimationBlock {
+  position: absolute;
+  border-radius: inherit;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
+
+.PlayButton:hover .AnimationBlock {
+  animation-fill-mode: backwards;
+  animation: scaleUpAndFade 1s infinite ease-out;
+}
+
+.PlayButton:hover {
+  animation-fill-mode: backwards;
+  animation: reduceScale 1s infinite ease-in;
+}
+
+/* .PlayButton .PlayArrow {
+  width: 0;
+  height: 0;
+  border-top: 3rem solid transparent;
+  border-left: 4rem solid red;
+  border-bottom: 3rem solid transparent;
+  border-radius: 50%;
+} */
+
+.PlayButton .PlayArrow {
+  position: relative;
+  background-color: white;
+  text-align: left;
+}
+.PlayButton .PlayArrow:before,
+.PlayButton .PlayArrow:after {
+  content: "";
+  position: absolute;
+  background-color: inherit;
+}
+.PlayButton .PlayArrow,
+.PlayButton .PlayArrow:before,
+.PlayButton .PlayArrow:after {
+  width: 3rem;
+  height: 3rem;
+  border-top-right-radius: 30%;
+}
+
+.PlayButton .PlayArrow {
+  transform: rotate(-60deg) skewX(-30deg) scale(1, 0.866) translateX(0.75rem);
+}
+.PlayButton .PlayArrow:before {
+  transform: rotate(-135deg) skewX(-45deg) scale(1.414, 0.707)
+    translate(0, -50%);
+}
+.PlayButton .PlayArrow:after {
+  transform: rotate(135deg) skewY(-45deg) scale(0.707, 1.414) translate(50%);
+}
+
+@keyframes scaleUpAndFade {
+  10% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    background-color: #4e4e4e;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes reduceScale {
+  0% {
+    transform: rotate(90deg) scale(0.95);
+  }
+  10% {
+    transform: rotate(90deg) scale(1);
+  }
+}

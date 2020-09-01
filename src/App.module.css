@@ -1,0 +1,13 @@
+.App {
+  position: relative;
+  height: auto;
+  min-height: 100%;
+  background-color: #eee;
+}
+
+@media screen and (max-width: 767px) {
+  .App {
+    height: auto;
+    min-height: 100%;
+  }
+}

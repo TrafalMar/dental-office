@@ -1,0 +1,41 @@
+.LoginPage {
+  display: grid;
+  height: auto;
+  min-height: 100vh;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.LoginPage .AuthSection {
+  min-width: 35rem;
+  display: grid;
+  place-items: center;
+  grid-column: 1/2;
+  padding: 3rem;
+  border-top-right-radius: 2.4rem;
+  border-bottom-right-radius: 2.4rem;
+
+  background-color: #fff;
+}
+.LoginPage .Video {
+  display: grid;
+  place-items: center;
+  grid-column: 2/5;
+}
+
+@media screen and (max-width: 767px) {
+  .LoginPage {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  .LoginPage .AuthSection {
+    height: 100vh;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 2.4rem;
+    grid-column: 1;
+    grid-row: 1/2;
+  }
+  .LoginPage .Video {
+    grid-column: 1;
+    grid-row: 2/3;
+  }
+}

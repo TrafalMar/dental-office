@@ -1,0 +1,10 @@
+.LoginForm {
+  width: 100%;
+}
+
+.LoginForm .InfoSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+}

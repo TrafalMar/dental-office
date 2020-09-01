@@ -1,0 +1,19 @@
+.TabLine {
+  cursor: pointer;
+  display: inline-block;
+
+  height: 0.4rem;
+  width: 4rem;
+  border-radius: 0.2rem;
+
+  background-color: #e8e8e9;
+  transition: 0.1s;
+}
+
+/* .TabLine:hover {
+  background-color: #bdbdbd;
+} */
+
+.Fill {
+  background-color: #4e4e4e;
+}
